@@ -9,7 +9,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
-        <header className="App-header">Hello</header>
+        {/* <header className="App-header">Hello</header> */}
         <Main />
       </div>
       <ReactQueryDevtools initialIsOpen={false} position={"bottom-right"} />

@@ -1,0 +1,41 @@
+@import './variables.scss';
+
+#table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px;
+}
+
+#table td,
+#table th {
+  border: 1px solid $text-light;
+  padding: 8px;
+}
+
+#table tr:nth-child(even) {
+  background-color: $secondary-color;
+  color: $text-light;
+}
+
+#table tr:nth-child(odd) {
+  background-color: $text-hover;
+  color: $text-dark;
+}
+
+#table tr:hover {
+  background-color: $primary-color;
+  color: $text-hover;
+}
+
+#table th, tfoot td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: $primary-color;
+  color: $text-light;
+}
+
+.filter_icon {
+  float: right;
+}
