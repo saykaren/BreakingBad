@@ -8,15 +8,21 @@ const Table = ({ dataSet }) => {
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState();
 
-  const modalCheck = (e) => {
-    setModalData(e);
-    if (modal === false) {
-      setModal(true);
+  const modalCheck = (e)=>{
+    setModalData(e)
+    if(modal === false){
+        setModal(true);
     }
-  };
+  }
 
   return (
     <>
+      <button
+        disabled={!modalData}
+        onClick={() => setModal(!modal)}
+      >
+        Activate Modal
+      </button>
       {modal && modalData && (
         <section className="">
           <div className="modal">
@@ -71,7 +77,7 @@ const Table = ({ dataSet }) => {
         <tbody>
           {dataSet.data &&
             dataSet.data.map((item, indexData) => (
-              <tr key={indexData} onClick={() => modalCheck(item)}>
+              <tr key={indexData} onClick={()=>modalCheck(item)}>
                 <td>{item.char_id}</td>
                 <td>{item.name}</td>
                 <td>{item.nickname}</td>
