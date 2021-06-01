@@ -13,7 +13,6 @@ const Main = () => {
   return (
     <div>
       <Table dataSet={characterData} />
-      {/* <Table dataSet={Mock_Data}/> */}
     </div>
   );
 };

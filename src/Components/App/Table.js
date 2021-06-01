@@ -7,13 +7,19 @@ import minimizeIcon from "./../Assets/minimize_white.png";
 const Table = ({ dataSet }) => {
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState();
+  const [sortWhat, setSortWhat] = useState("name");
 
-  const modalCheck = (e)=>{
-    setModalData(e)
-    if(modal === false){
-        setModal(true);
+  const modalCheck = (e) => {
+    setModalData(e);
+    if (modal === false) {
+      setModal(true);
     }
-  }
+  };
+
+  const sortable = (e) => {
+    // console.log(typeof(e));
+    setSortWhat(e);
+  };
 
   return (
     <>
@@ -66,25 +72,44 @@ const Table = ({ dataSet }) => {
       <table id="table">
         <thead>
           <tr>
-            <th colSpan="4">Breaking Bad</th>
+            <th colSpan="4">Breaking Bad {sortWhat}</th>
           </tr>
           <tr>
-            <th>Character Id</th>
-            <th>Character Name</th>
-            <th>Nickname</th>
-            <th>Actor</th>
+            <th>
+              Character Id{" "}
+              {/* <img src={sort} alt="sort" onClick={() => sortable("char_id")} /> */}
+            </th>
+            <th>
+              Character Name{" "}
+              <img src={sort} alt="sort" onClick={() => sortable("name")} />
+            </th>
+            <th>
+              Nickname{" "}
+              <img src={sort} alt="sort" onClick={() => sortable("nickname")} />
+            </th>
+            <th>
+              Actor{" "}
+              <img
+                src={sort}
+                alt="sort"
+                onClick={() => sortable("portrayed")}
+              />
+            </th>
           </tr>
         </thead>
         <tbody>
           {dataSet.data &&
-            dataSet.data.map((item, indexData) => (
-              <tr key={indexData} onClick={()=>modalCheck(item)}>
-                <td id={item.char_id}>{item.char_id}</td>
-                <td id={item.name}>{item.name}</td>
-                <td id={item.nickname}>{item.nickname}</td>
-                <td id={item.portrayed}>{item.portrayed}</td>
-              </tr>
-            ))}
+            dataSet.data
+
+              .sort((a, b) => a[`${sortWhat}`].localeCompare(b.name))
+              .map((item, indexData) => (
+                <tr key={indexData} onClick={() => modalCheck(item)}>
+                  <td id={item.char_id}>{item.char_id}</td>
+                  <td id={item.name}>{item.name}</td>
+                  <td id={item.nickname}>{item.nickname}</td>
+                  <td id={item.portrayed}>{item.portrayed}</td>
+                </tr>
+              ))}
         </tbody>
       </table>
     </>
