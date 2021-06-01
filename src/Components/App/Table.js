@@ -18,6 +18,7 @@ const Table = ({ dataSet }) => {
   return (
     <>
       <button
+        className="modalButton"
         disabled={!modalData}
         onClick={() => setModal(!modal)}
       >
@@ -78,10 +79,10 @@ const Table = ({ dataSet }) => {
           {dataSet.data &&
             dataSet.data.map((item, indexData) => (
               <tr key={indexData} onClick={()=>modalCheck(item)}>
-                <td>{item.char_id}</td>
-                <td>{item.name}</td>
-                <td>{item.nickname}</td>
-                <td>{item.portrayed}</td>
+                <td id={item.char_id}>{item.char_id}</td>
+                <td id={item.name}>{item.name}</td>
+                <td id={item.nickname}>{item.nickname}</td>
+                <td id={item.portrayed}>{item.portrayed}</td>
               </tr>
             ))}
         </tbody>
