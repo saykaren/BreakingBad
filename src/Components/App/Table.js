@@ -9,6 +9,7 @@ const Table = ({ dataSet }) => {
     sortItemOne: `a`,
     keyItem: "name",
   });
+  const [searchTerm, setSearchTerm] = useState("");
 
   const modalCheck = (e) => {
     setModalData(e);
@@ -65,10 +66,19 @@ const Table = ({ dataSet }) => {
           </div>
         </section>
       )}
+
       <table id="table">
         <thead>
           <tr>
-            <th colSpan="4">Breaking Bad </th>
+            <th colSpan="4">
+              Breaking Bad
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.currentTarget.value)}
+                placeholder="Character Search"
+              />
+            </th>
           </tr>
           <tr>
             <th>Character Id</th>
@@ -77,24 +87,46 @@ const Table = ({ dataSet }) => {
               sortWhat={sortWhat}
               headerSort="name"
               sortable={sortable}
+              setSearchTerm={setSearchTerm}
+              searchTerm={searchTerm}
             />
             <TableHeaderSorter
               title="Nickname"
               sortWhat={sortWhat}
               headerSort="nickname"
               sortable={sortable}
+              setSearchTerm={setSearchTerm}
+              searchTerm={searchTerm}
             />
             <TableHeaderSorter
               title="Actor"
               sortWhat={sortWhat}
               headerSort="portrayed"
               sortable={sortable}
+              setSearchTerm={setSearchTerm}
+              searchTerm={searchTerm}
             />
           </tr>
         </thead>
         <tbody>
           {dataSet.data &&
             dataSet.data
+              .filter(
+                (item) =>
+                  item.name
+                    .toLocaleLowerCase()
+                    .includes(searchTerm.toLocaleLowerCase()) ||
+                  item.nickname
+                    .toLocaleLowerCase()
+                    .includes(searchTerm.toLocaleLowerCase()) ||
+                  item.portrayed
+                    .toLocaleLowerCase()
+                    .includes(searchTerm.toLocaleLowerCase()) ||
+                  item.char_id
+                    .toString()
+                    .toLocaleLowerCase()
+                    .includes(searchTerm.toLocaleLowerCase())
+              )
               .sort((a, b) =>
                 sortWhat.sortItemOne === "a"
                   ? a[`${sortWhat.keyItem}`].localeCompare(
