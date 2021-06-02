@@ -1,13 +1,14 @@
-import React, { useMemo, useState } from "react";
-import upArrow from "./../Assets/expand_less.png";
-import downArrow from "./../Assets/expand_more.png";
-import sort from "./../Assets/sort_white.png";
+import React, { useState } from "react";
 import minimizeIcon from "./../Assets/minimize_white.png";
+import TableHeaderSorter from "./TableHeaderSorter";
 
 const Table = ({ dataSet }) => {
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState();
-  const [sortWhat, setSortWhat] = useState("name");
+  const [sortWhat, setSortWhat] = useState({
+    sortItemOne: `a`,
+    keyItem: "name",
+  });
 
   const modalCheck = (e) => {
     setModalData(e);
@@ -16,20 +17,15 @@ const Table = ({ dataSet }) => {
     }
   };
 
-  const sortable = (e) => {
-    // console.log(typeof(e));
-    setSortWhat(e);
+  const sortable = (keyWord, orderOne) => {
+    setSortWhat({
+      sortItemOne: `${orderOne}`,
+      keyItem: `${keyWord}`,
+    });
   };
 
   return (
     <>
-      <button
-        className="modalButton"
-        disabled={!modalData}
-        onClick={() => setModal(!modal)}
-      >
-        Activate Modal
-      </button>
       {modal && modalData && (
         <section className="">
           <div className="modal">
@@ -72,36 +68,42 @@ const Table = ({ dataSet }) => {
       <table id="table">
         <thead>
           <tr>
-            <th colSpan="4">Breaking Bad {sortWhat}</th>
+            <th colSpan="4">Breaking Bad </th>
           </tr>
           <tr>
-            <th>
-              Character Id{" "}
-              {/* <img src={sort} alt="sort" onClick={() => sortable("char_id")} /> */}
-            </th>
-            <th>
-              Character Name{" "}
-              <img src={sort} alt="sort" onClick={() => sortable("name")} />
-            </th>
-            <th>
-              Nickname{" "}
-              <img src={sort} alt="sort" onClick={() => sortable("nickname")} />
-            </th>
-            <th>
-              Actor{" "}
-              <img
-                src={sort}
-                alt="sort"
-                onClick={() => sortable("portrayed")}
-              />
-            </th>
+            <th>Character Id</th>
+            <TableHeaderSorter
+              title="Charcter Name"
+              sortWhat={sortWhat}
+              headerSort="name"
+              sortable={sortable}
+            />
+            <TableHeaderSorter
+              title="Nickname"
+              sortWhat={sortWhat}
+              headerSort="nickname"
+              sortable={sortable}
+            />
+            <TableHeaderSorter
+              title="Actor"
+              sortWhat={sortWhat}
+              headerSort="portrayed"
+              sortable={sortable}
+            />
           </tr>
         </thead>
         <tbody>
           {dataSet.data &&
             dataSet.data
-
-              .sort((a, b) => a[`${sortWhat}`].localeCompare(b.name))
+              .sort((a, b) =>
+                sortWhat.sortItemOne === "a"
+                  ? a[`${sortWhat.keyItem}`].localeCompare(
+                      b[`${sortWhat.keyItem}`]
+                    )
+                  : b[`${sortWhat.keyItem}`].localeCompare(
+                      a[`${sortWhat.keyItem}`]
+                    )
+              )
               .map((item, indexData) => (
                 <tr key={indexData} onClick={() => modalCheck(item)}>
                   <td id={item.char_id}>{item.char_id}</td>

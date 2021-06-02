@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import fetchURL from "./../useQuery/fetchUrl";
 import Table from "./Table";
-import Mock_Data from "./../Testing/Mock_Data";
 
 const Main = () => {
   const [characterURL, setCharacterURL] = useState(
