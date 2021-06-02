@@ -10,7 +10,7 @@ const Main = () => {
 
   const characterData = useQuery(["character", `${characterURL}`], fetchURL);
   return (
-    <div>
+    <div className="main_component">
       <Table dataSet={characterData} />
     </div>
   );
