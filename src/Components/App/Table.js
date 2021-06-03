@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import minimizeIcon from "./../Assets/minimize_white.png";
 import TableHeaderSorter from "./TableHeaderSorter";
+import Modal from "./Modal";
 
 const Table = ({ dataSet }) => {
   const [modal, setModal] = useState(false);
@@ -27,46 +27,9 @@ const Table = ({ dataSet }) => {
 
   return (
     <>
-      {modal && modalData && (
-        <section className="">
-          <div className="modal">
-            <img
-              src={minimizeIcon}
-              alt="minimize"
-              onClick={() => setModal(!modal)}
-              className="smallIcon floatRight"
-            />
-            {modalData ? (
-              <div>
-                <img
-                  src={modalData.img}
-                  alt="CharacterPicture"
-                  className="modalPicture"
-                />
-                <table id="table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Birthday</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{modalData.name}</td>
-                      <td>{modalData.birthday} </td>
-                      <td>{modalData.status}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <div>no record</div>
-            )}
-          </div>
-        </section>
+      {modal && (
+        <Modal modalData={modalData} setModal={setModal} modal={modal} />
       )}
-
       <table id="table">
         <thead>
           <tr>

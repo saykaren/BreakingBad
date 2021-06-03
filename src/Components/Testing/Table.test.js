@@ -23,12 +23,12 @@ describe("Render Table", () => {
     expect(wrapper.exists(".modalPicture")).toEqual(false);
     expect(wrapper.exists(".modal")).toEqual(false);
 
-    expect(node.last().props().id).toEqual("Tony Dalton");
-    expect(node.at(1).props().id).toEqual("Walter White");
+    expect(node.last().props().id).toEqual("Julie Minesci");
+    expect(node.at(1).props().id).toEqual("Adam Pinkman");
   });
 
   it("Modal Activate", () => {
     table.find("tr").at(3).simulate("click");
-    expect(wrapper.exists(".modal")).toEqual(true);
+    expect(node.at(9).props().id).toEqual("Bogdan Wolynetz");
   });
 });
