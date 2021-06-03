@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
+import fetchQuotes from "../useQuery/fetchQuotes";
 import minimizeIcon from "./../Assets/minimize_white.png";
 
 const Modal = ({ modalData, modal, setModal }) => {
+  const [quoteURL, setQuoteURL] = useState(
+    "https://breakingbadapi.com/api/quote?author="
+  );
+  const testing = modalData.name.replace(" ", "+");
+  const quoteData = useQuery(
+    ["quotes", `${quoteURL}`, `${testing}`],
+    fetchQuotes
+  );
+
   return (
     <>
       {modalData && (
@@ -12,7 +23,7 @@ const Modal = ({ modalData, modal, setModal }) => {
               alt="minimize"
               onClick={() => setModal(!modal)}
               className="smallIcon floatRight"
-              id='modal_close'
+              id="modal_close"
             />
             {modalData ? (
               <div>
@@ -40,6 +51,19 @@ const Modal = ({ modalData, modal, setModal }) => {
               </div>
             ) : (
               <div>no record</div>
+            )}
+            {quoteData.status && quoteData.data && quoteData.data[1] && (
+              <cite>
+                "
+                {
+                  quoteData.data[
+                    `${Math.floor(
+                      Math.random() * (quoteData.data.length - 1) + 1
+                    )}`
+                  ].quote
+                }
+                "
+              </cite>
             )}
           </div>
         </section>
