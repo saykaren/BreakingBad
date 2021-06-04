@@ -39,7 +39,7 @@ const Table = ({ dataSet }) => {
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.currentTarget.value)}
-                placeholder="Character Search"
+                placeholder="Search Page"
               />
             </th>
           </tr>
