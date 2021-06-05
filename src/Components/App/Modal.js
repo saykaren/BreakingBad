@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import fetchQuotes from "../useQuery/fetchQuotes";
-import minimizeIcon from "./../Assets/minimize_white.png";
+import cancel from "./../Assets/cancel.png";
 
 const Modal = ({ modalData, modal, setModal }) => {
   const [quoteURL, setQuoteURL] = useState(
@@ -40,77 +40,81 @@ const Modal = ({ modalData, modal, setModal }) => {
   return (
     <>
       {modalData && (
-        <section className="">
-          <div className="modal">
-            <img
-              src={minimizeIcon}
-              alt="minimize"
-              onClick={() => setModal(!modal)}
-              className="smallIcon floatRight"
-              id="modal_close"
-            />
+        <>
+          <>
             {modalData ? (
-              <div>
-                <img
-                  src={modalData.img}
-                  alt="CharacterPicture"
-                  className="modalPicture"
-                />
-                <table id="table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      {modalData.birthday !== "Unknown" && <th>Birthday</th>}
-                      <th>Status</th>
-                      {modalData.status === "Deceased" &&
-                        deathEventData.isSuccess &&
-                        deathEventData.data.length > 0 && (
-                          <>
-                            <th>Cause</th>
-                            <th>Killer</th>
-                            <th>Last Words</th>
-                          </>
-                        )}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td id={`modal${modalData.name}`}>{modalData.name}</td>
-                      {modalData.birthday !== "Unknown" && (
-                        <td>{modalData.birthday} </td>
-                      )}
-                      <td>{modalData.status}</td>
-                      {modalData.status === "Deceased" &&
-                        deathEventData.isSuccess &&
-                        deathEventData.data.length > 0 && (
-                          <>
-                            <td>{deathEventData.data[0].cause}</td>
-                            <td>{deathEventData.data[0].responsible}</td>
-                            <td>{deathEventData.data[0].last_words}</td>
-                          </>
-                        )}
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="modal">
+                <section>
+                  <img
+                    src={modalData.img}
+                    alt="CharacterPicture"
+                    className="modalPicture"
+                  />
+                  <img
+                    src={cancel}
+                    alt="minimize"
+                    onClick={() => setModal(!modal)}
+                    className="smallIcon floatRight"
+                    id="modal_close"
+                  />
+                </section>
+                <section className="modal_header">
+                  <span className="modal_title modal_header_title">
+                    {modalData.name}
+                  </span>
+                </section>
+
+                {modalData.status === "Deceased" &&
+                  deathEventData.isSuccess &&
+                  deathEventData.data.length > 0 && (
+                    <section className="modal_details">
+                      <div className="modal_list">
+                        <span className="modal_title">Cause of Death: </span>
+                        {deathEventData.data[0].cause}
+                      </div>
+                      <div className="modal_list">
+                        <span className="modal_title">Killer: </span>
+                        {deathEventData.data[0].responsible}
+                      </div>
+                      <div className="modal_list">
+                        <span className="modal_title">Last Words: </span>
+                        <span className="modal_quote">
+                          "{deathEventData.data[0].last_words}"
+                        </span>
+                      </div>
+                    </section>
+                  )}
+                {quoteData.status && quoteData.data && quoteData.data[1] && (
+                  <section className="modal_details">
+                    {modalData.birthday !== "Unknown" && (
+                      <div className="modal_list">
+                        <span className="modal_title">Birthday</span>
+                        {modalData.birthday}{" "}
+                      </div>
+                    )}
+                    <div className="modal_list">
+                      <span className="modal_title">Dead or Alive: </span>
+                      {modalData.status}
+                    </div>
+                    <div className="modal_quote">
+                      "
+                      {
+                        quoteData.data[
+                          `${Math.floor(
+                            Math.random() * (quoteData.data.length - 1) + 1
+                          )}`
+                        ].quote
+                      }
+                      "
+                    </div>
+                  </section>
+                )}
               </div>
             ) : (
               <div>no record</div>
             )}
-            {quoteData.status && quoteData.data && quoteData.data[1] && (
-              <cite>
-                "
-                {
-                  quoteData.data[
-                    `${Math.floor(
-                      Math.random() * (quoteData.data.length - 1) + 1
-                    )}`
-                  ].quote
-                }
-                "
-              </cite>
-            )}
-          </div>
-        </section>
+          </>
+        </>
       )}
     </>
   );
