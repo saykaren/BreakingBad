@@ -16,7 +16,7 @@ const Modal = ({ modalData, modal, setModal }) => {
   );
 
   const quoteData = useQuery(
-    ["quotes", `${quoteURL}`, `${modalData.name.replace(" ", "+")}`],
+    ["quotes", `${quoteURL}`, `${modalData.name && modalData.name.replace(" ", "+")}`],
     fetchQuotes
   );
   const deathResponsibleData = useQuery(
