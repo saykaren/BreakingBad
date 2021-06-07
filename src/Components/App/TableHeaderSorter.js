@@ -3,7 +3,7 @@ import upArrow from "./../Assets/expand_less.png";
 import downArrow from "./../Assets/expand_more.png";
 import sort from "./../Assets/sort_white.png";
 
-const TableHeaderSorter = ({ title, sortWhat, headerSort, sortable }) => {
+const TableHeaderSorter = ({ title, sortWhat, headerSort, sortable, id}) => {
   return (
     <th>
       {title}
@@ -22,6 +22,7 @@ const TableHeaderSorter = ({ title, sortWhat, headerSort, sortable }) => {
             `${sortWhat.sortItemOne === "a" ? "b" : "a"}`
           )
         }
+        id={id}
       />
     </th>
   );
