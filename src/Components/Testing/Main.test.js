@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
 
 describe("rendering Main components", () => {
-  it("renders Main component without crashing", () => {
+  it("It renders Main component without crashing", () => {
     shallow(
       <QueryClientProvider client={queryClient}>
         <Main />

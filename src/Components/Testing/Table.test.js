@@ -14,20 +14,22 @@ describe("Render Table", () => {
   const node = table.find("td");
   const modal = wrapper.find(".modal");
 
-  it("table grid", () => {
+  it("It shows 64 rows on the table grid", () => {
     expect(table).toHaveLength(1);
     expect(row).toHaveLength(64);
   });
 
-  it("Modal", () => {
+  it("It checks the modal is closed", () => {
     expect(wrapper.exists(".modalPicture")).toEqual(false);
     expect(wrapper.exists(".modal")).toEqual(false);
+  });
 
+  it("It checks first rendered with Character Name ascending A-Z ", () => {
     expect(node.last().props().id).toEqual("Julie Minesci");
     expect(node.at(1).props().id).toEqual("Adam Pinkman");
   });
 
-  it("Modal Activate", () => {
+  it("It checks order of rows", () => {
     table.find("tr").at(3).simulate("click");
     expect(node.at(9).props().id).toEqual("Bogdan Wolynetz");
   });
