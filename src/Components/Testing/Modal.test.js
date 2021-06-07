@@ -23,18 +23,21 @@ const button = modalComponent.find("#modal_close");
 // }
 
 describe("Render Modal", () => {
-  it("Renders Modal", () => {
+  it("It finds the class modal on the modal component", () => {
     expect(wrapper.find(".modal"));
+  });
+
+  it("It finds the modal close image", () => {
     expect(modalComponent.find("#modal_close"));
   });
 
-  it("Click button", () => {
+  it("It clicks button to check call", () => {
     // button.simulate('click')
     // expect(setModal.mock.calls.length).toEqual(1);
     //  React.useState
   });
 
-  it("Modal", () => {
+  it("It renders the modal picture", () => {
     expect(modalComponent.exists(".modalPicture")).toBeTruthy;
     expect(modalComponent.exists(".modal_close")).toBeTruthy;
   });
