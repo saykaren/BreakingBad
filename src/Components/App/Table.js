@@ -9,6 +9,7 @@ const Table = ({ dataSet }) => {
     sortItemOne: `a`,
     keyItem: "name",
   });
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const modalCheck = (e) => {
@@ -38,8 +39,9 @@ const Table = ({ dataSet }) => {
               <input
                 type="text"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.currentTarget.value)}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search Page"
+                id="inputSearchTerm"
               />
             </th>
           </tr>
@@ -52,6 +54,7 @@ const Table = ({ dataSet }) => {
               sortable={sortable}
               setSearchTerm={setSearchTerm}
               searchTerm={searchTerm}
+              id="Character_Name"
             />
             <TableHeaderSorter
               title="Nickname"
@@ -60,6 +63,7 @@ const Table = ({ dataSet }) => {
               sortable={sortable}
               setSearchTerm={setSearchTerm}
               searchTerm={searchTerm}
+              id="Nickname"
             />
             <TableHeaderSorter
               title="Actor"
@@ -68,6 +72,7 @@ const Table = ({ dataSet }) => {
               sortable={sortable}
               setSearchTerm={setSearchTerm}
               searchTerm={searchTerm}
+              id="Actor"
             />
           </tr>
         </thead>
@@ -100,7 +105,7 @@ const Table = ({ dataSet }) => {
                     )
               )
               .map((item, indexData) => (
-                <tr key={indexData} onClick={() => modalCheck(item)}>
+                <tr key={indexData} onClick={() => modalCheck(item)} className="data_row">
                   <td id={item.char_id}>{item.char_id}</td>
                   <td id={item.name}>{item.name}</td>
                   <td id={item.nickname}>{item.nickname}</td>
